@@ -24,7 +24,10 @@ namespace Generic.MailSender.Api
         {
             services.AddScoped<AbstractValidator<Email>, EmailValidator>();
             services.AddControllers();
-            services.AddFluentEmail("fromemail@test.test").AddSmtpSender("fake_smtp", 1025);
+            services
+                .AddFluentEmail(Configuration.GetValue<string>("Mail:Sender"))
+                .AddRazorRenderer()
+                .AddSmtpSender(Configuration.GetValue<string>("Mail:Host"), Configuration.GetValue<int>("Mail:Port"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Generic.MailSender.Api", Version = "v1" });

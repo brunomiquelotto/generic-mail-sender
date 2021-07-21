@@ -1,0 +1,15 @@
+@{
+	<h1 style="color:blue; background-color: grey; font-size: 25px;">
+		Dear @Model.Name, welcome
+	</h1>
+
+	@if (Model.Items != null)
+	{
+		<ul>
+			@foreach (var item in Model.Items)
+			{
+				<li>@item.Name</li>
+			}
+		</ul>
+	}
+}

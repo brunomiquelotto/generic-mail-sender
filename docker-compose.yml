@@ -6,6 +6,13 @@ services:
     build:
       context: .
       dockerfile: Generic.MailSender.Api/Dockerfile
+    environment:
+        Mail__Host: "fake_smtp"
+        Mail__Port: 1025
+        Mail__Sender: "source@test.com"
+        Mail__Templates: "/var/mail-templates"
+    volumes:
+        - "./Generic.MailSender.Api/Templates:/var/mail-templates:ro"
   fake_smtp:
     image: mailhog/mailhog
     ports:
